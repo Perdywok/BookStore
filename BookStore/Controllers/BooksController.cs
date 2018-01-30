@@ -11,7 +11,7 @@ using BookStore.Models;
 
 namespace BookStore.Controllers
 {
-    
+
     public class BooksController : Controller
     {
         private LibraryContext db = new LibraryContext();
@@ -19,7 +19,9 @@ namespace BookStore.Controllers
         // GET: Books
         public async Task<ActionResult> Index()
         {
-            return View(await db.MyEntities.ToListAsync());
+            if (User.IsInRole("admin"))
+                return View("~/Views/Books/AdminBooksList.cshtml", await db.MyEntities.ToListAsync());            
+            return View("~/Views/Books/Index.cshtml", await db.MyEntities.ToListAsync());
         }
 
         // GET: Books/Details/5
