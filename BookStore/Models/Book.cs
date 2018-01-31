@@ -17,7 +17,10 @@ namespace BookStore.Models
         public Genre Genre { get; set; }
 
         public Cover Cover { get; set; }
+
         [Range(1, 6000, ErrorMessage = "Number of pages is incorrect")]
         public int Pages { get; set; }
+        
+        public Author Authors { get; set; }
     }
 }

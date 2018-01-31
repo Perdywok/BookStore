@@ -17,6 +17,7 @@ namespace BookStore.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Books
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
             if (User.IsInRole("admin"))
@@ -25,6 +26,7 @@ namespace BookStore.Controllers
         }
 
         // GET: Books/Details/5
+        [AllowAnonymous]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -80,6 +82,7 @@ namespace BookStore.Controllers
         // POST: Books/Edit/5
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Genre,Cover,Pages")] Book book)
         {
